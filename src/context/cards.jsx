@@ -5,8 +5,8 @@ function Card({ value, editData, deleteData, }) {
 
     return (
         <div className="border-2 border-white/180 rounded-lg ">
-            <img src={value.img} alt="" className="object-cover aspect-squre lg:h-80 w-full mb-3" />
-            <h3 className="px-2 font-semibold border border-blue-100 rounded-lg text-center">{value.userName}</h3>
+            <img src={value.img} alt="" className="object-cover rounded-lg  aspect-squre lg:h-80 w-full mb-3" />
+            <h3 className="px-2 mx-5 font-semibold border border-blue-100 rounded-lg text-center">{value.userName}</h3>
             <div className="p-2 space-y-2" >
                 <div className="flex justify-around" >
                     <h4 className="text-white px-2 font-semibold border border-blue-100 rounded-lg">{value.price}</h4>

@@ -1,5 +1,6 @@
-import { createContext,useState } from "react";
+import { createContext,useContext,useState } from "react";
 import { data } from "react-router";
+import Header from "./Header";
 
 export const ProductContext = createContext();
 
@@ -15,10 +16,11 @@ export default function ProductProvider({ children }){
     const [data, setData] = useState([]);
     const [activeEditIndex, setActiveEditIndex] = useState(null);
 
-
+    
 return(
     <ProductContext.Provider value={{data,setData,values,setValues,activeEditIndex, setActiveEditIndex,initialValue}}>
     {children}
+    
     </ProductContext.Provider>
 )
 }

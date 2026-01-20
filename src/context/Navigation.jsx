@@ -6,7 +6,6 @@ import { Link } from 'react-router';
 import { ProductContext } from './context';
 import { useNavigate } from 'react-router';
 
-
 function Navigation() {
     const navigate = useNavigate();
     const {data,setData,values,setValues,initialValue,activeEditIndex, setActiveEditIndex} =
@@ -50,13 +49,14 @@ function Navigation() {
 
         return searchMatch && minMatch && maxMatch;
     });
-    return (
-        <div className='relative max-w-350 min-h-screen  px-6 border-2 rounded-lg p-4'>
-            <div className="bg-[url(/bg.png)] opacity-30 absolute inset-0 -z-10 "></div>
+    return (   
+        <div>
+        <div className=' bg-neutral-primary min-h-screen min-w-screen border-b border-default'>
+       
             <div>
-                <div className="flex justify-between items-center gap-4 flex-nowrap w-full">
-                    <div className="relative w-full sm:w-96" >
-                        <input type="search" placeholder="Search The Product InFo" className="w-full h-12 p-4 px-22 pr-12  rounded-full bg-gray-600 text-white border-1 " value={wordEntered} onChange={(e) => setWordEntered(e.target.value)} />
+                <div className="py-6">
+                    <div className="relative w-full max-w-sm " >
+                        <input type="search" placeholder="Search The Product" className=" h-12  px-6 w-60 rounded-full  text-white border-2 " value={wordEntered} onChange={(e) => setWordEntered(e.target.value)} />
                         {filterData.length > 0 && (
                             <div className='dataResult'>
                                 {filterData.slice(0, 15).map((item, index) => {
@@ -66,17 +66,16 @@ function Navigation() {
                                 })}
                             </div>
                         )}
-                        <div className=" text-right mr-4 ">
-                            <button className="absolute right-4 top-1/2 -translate-y-1/2 text-white mix-blend-lighten"size={22}><IoIosSearch />
-                            </button>
+                        <div className="  ">
+                            <h4 className="absolute right-40 top-1/2 -translate-y-1/2 text-white mix-blend-lighten"size={22}><IoIosSearch />
+                            </h4>
                         </div>
                     </div>
-                    <div>
-                    <button className='mix-blend-lighten' ><Link to="/" ><h4 className='h-12 p-3 pr-10 px-9 rounded-full bg-gray-600 text-white border-1 '>Add To Product </h4>  </Link></button></div>
+                 
                     
-                    <div className='flex gap-3'>
-                        <input type="number" placeholder='Min' className='px-7 w-30 h-10 rounded-full bg-gray-600 border-1 m-2' value={minPrice} onChange={(e) => setMinPrice(e.target.value)} />
-                        <input type="number" placeholder='Max' className='px-7 w-30 h-10 rounded-full bg-gray-600 border-1 m-2' value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} />
+                    <div className='flex gap-3  justify-center'>
+                        <input type="number" placeholder='Min' className='px-7 w-30 h-10 rounded-full  border-2 m-2' value={minPrice} onChange={(e) => setMinPrice(e.target.value)} />
+                        <input type="number" placeholder='Max' className='px-7 w-30 h-10 rounded-full  border-2 m-2' value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} />
                     </div>
                 </div>
             </div>
@@ -86,6 +85,7 @@ function Navigation() {
                     <Card key={i} value={value} editData={() => editData(i)} deleteData={() => deleteData(i)} />
                 ))}
             </div>
+      </div>
       </div>
     )
 

@@ -58,7 +58,7 @@ function Navigation() {
         return searchMatch && minMatch && maxMatch;
     });
     return (
-        <div className='relative max-w-350 min-h-screen  px-6 border-2 rounded-lg p-4'>
+        <div className='relative max-w-350 min-h-screen  border-2 rounded-lg '>
             <div className="bg-[url(/bg.png)] opacity-30 absolute inset-0 -z-10 "></div>
             <div>
                 <div className="flex justify-between items-center gap-4 flex-nowrap w-full">
