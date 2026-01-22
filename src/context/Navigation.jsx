@@ -1,16 +1,14 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext,  useState } from 'react'
 import { useDebounce } from "use-debounce";
 import Card from './cards';
-import { IoIosSearch } from "react-icons/io";
-import { Link } from 'react-router';
-import { ProductContext } from './context';
+import { ProductContext } from '../Usecontext/context';
 import { useNavigate } from 'react-router';
 
 function Navigation() {
     const navigate = useNavigate();
-    const {data,setData,values,setValues,initialValue,activeEditIndex, setActiveEditIndex} =
+    const {data,setData,setValues, setActiveEditIndex} =
      useContext(ProductContext);
-    const [filterData, setFilterData] = useState([]);
+    const [filterData] = useState([]);
     const [wordEntered, setWordEntered] = useState("");
 
     const [minPrice, setMinPrice] = useState("")
@@ -51,11 +49,11 @@ function Navigation() {
     });
     return (   
         <div>
-        <div className=' bg-neutral-primary min-h-screen min-w-screen border-b border-default'>
+        <div className=' bg-neutral-primary min-h-screen min-w-screen border-b border-default pt-25'>
        
             <div>
                 <div className="py-6">
-                    <div className="relative w-full max-w-sm " >
+                    <div className=" w-full max-w-sm " >
                         <input type="search" placeholder="Search The Product" className=" h-12  px-6 w-60 rounded-full  text-white border-2 " value={wordEntered} onChange={(e) => setWordEntered(e.target.value)} />
                         {filterData.length > 0 && (
                             <div className='dataResult'>
@@ -66,10 +64,10 @@ function Navigation() {
                                 })}
                             </div>
                         )}
-                        <div className="  ">
+                        {/* <div className="  ">
                             <h4 className="absolute right-40 top-1/2 -translate-y-1/2 text-white mix-blend-lighten"size={22}><IoIosSearch />
                             </h4>
-                        </div>
+                        </div> */}
                     </div>
                  
                     
@@ -80,7 +78,7 @@ function Navigation() {
                 </div>
             </div>
             <br />
-            <div className="mt-6 border-blue-100 p-1  grid grid-cols-1 gap-x-6 gap-y-6 justify around sm:grid-cols-2 lg:grid-cols-4 ">
+            <div className=" border-blue-100 border-t-2 py-9  grid grid-cols-1 gap-x-6 gap-y-6 justify around sm:grid-cols-2 lg:grid-cols-4 ">
                 {filter.map((value, i) => (
                     <Card key={i} value={value} editData={() => editData(i)} deleteData={() => deleteData(i)} />
                 ))}

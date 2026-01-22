@@ -1,4 +1,4 @@
-export default function handleImage(file){
+export default function ConvertImage(file){
     return new Promise((resolve) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);

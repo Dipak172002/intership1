@@ -14,8 +14,8 @@ function Card({ value, editData, deleteData, }) {
                 </div>
             </div>
             <div className="flex gap-2 justify-center mb-2">
-                <button className="  mix-blend-lighten" style={{ border: "2px solid White" }} onClick={() => editData()}> <FiEdit3 /></button>
-                <button className="mix-blend-lighten" style={{ border: "2px solid White " }} onClick={() => deleteData()}> <MdDelete /></button>
+                <button className="  mix-blend-lighten px-4 py-2 rounded-lg" style={{ border: "2px solid White" }} onClick={() => editData()}> <FiEdit3 /></button>
+                <button className="mix-blend-lighten px-4 py-2 rounded-lg " style={{ border: "2px solid White " }} onClick={() => deleteData()}> <MdDelete /></button>
             </div>
         </div>
     )

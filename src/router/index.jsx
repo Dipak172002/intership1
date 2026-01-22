@@ -1,30 +1,51 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-// import CreateProduct  from "../product/Home";
-// import ProductNavigation  from "../product/Navigation";
+// import CreateProduct  from "../LocalStorage/Home";
+// import ProductNavigation  from "../LocalStorage/Navigation";
 import CreateProduct from "../context/Home";
 import ProductNavigation from "../context/Navigation";
 import Layout from "../context/Laylot";
-import ProductProvider from "../context/context";
-import Header from "../context/Header";
-import Footer from "../context/Footer";
+import  ProductReport from "../context/report";
+import Setting from "../context/setting";
+import About from "../context/about";
+import Help from "../context/help";
 
 
 export default function Router() {
     return (
-        <ProductProvider>
             <BrowserRouter>
-                    <Header/>
                 <Routes>
-                    <Route
-                    // element={<Layout />}
-                    >
-                        <Route path="/" element={<CreateProduct />} />
-                        <Route path="/navigation" element={<ProductNavigation />} />
-                    </Route>
+                    <Route path="/" element={
+                        <Layout>
+                            <CreateProduct />
+                        </Layout>
+                    } />
+                    <Route path="/navigation" element={
+                        <Layout>
+                        <ProductNavigation />
+                        </Layout>
+                    } />
+                    <Route path="/report" element={
+                        <Layout>
+                        <ProductReport />
+                        </Layout>
+                    } />
+                    <Route path="/setting" element={
+                        <Layout>
+                            <Setting/>
+                        </Layout>
+                    }/>
+                    <Route path="/about" element={ 
+                        <Layout>
+                            <About/>
+                        </Layout>
+                    }/>
+                    <Route path="/help" element={
+                        <Layout>
+                            <Help/>
+                        </Layout>
+                    }/>
                 </Routes>
-                        <Footer/>
             </BrowserRouter>
-        </ProductProvider>
 
     )
 }
