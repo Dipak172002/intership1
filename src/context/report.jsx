@@ -1,8 +1,19 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ProductContext } from "../Usecontext/context";
 
 export default function Report() {
-  const { data } = useContext(ProductContext);
+  const { data ,setData} = useContext(ProductContext);
+
+  useEffect (()=>{
+    getUserData()
+  },[])
+  const getUserData = async()=>{
+    const url="http://localhost:3001/products";
+    let response = await fetch(url);
+    response =await response.json();
+    console.log(response);
+    setData(response)
+  }
 
   return (
     <div className="pt-45 min-h-screen  min-w-screen py-17 px-6">
@@ -31,5 +42,6 @@ export default function Report() {
         </table>
       )}
     </div>
+   
   );
 }

@@ -1,21 +1,41 @@
 import { useContext } from 'react'
 import ConvertImage from './ConvertImage'
 import { useNavigate } from 'react-router';
-import { useFormStatus } from 'react-dom';
+// import { useFormStatus } from 'react-dom';
 import { ProductContext } from '../Usecontext/context';
 
-function Submit() {
-  const { pending } = useFormStatus();
-  return <button disabled={pending}className='border-white-300 border-2 rounded-lg px-5 py-2'>{pending ? 'Submitting...' : 'Submit'} </button>
-}
+// function Submit() {
+//   const { pending } = useFormStatus();
+//   return <button disabled={pending}className='border-white-300 border-2 rounded-lg px-5 py-2'>{pending ? 'Submitting...' : 'Submit'} </button>
+// }
 
 function Home() {
   const navigate = useNavigate();
   const { data, setData, values, setValues, initialValue, activeEditIndex, setActiveEditIndex } =
     useContext(ProductContext);
 
+    const createUser = async()=>{
+    await fetch ("http://localhost:3001/products" ,{
+        method:'Post',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify(values)
+      })
+      
+    }
+    
+    
+    const updateUser = async () => {
+      await fetch(`http://localhost:3001/products/${activeEditIndex}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+    };
 
-  const multiSubmit = (e) => {
+  const multiSubmit = async(e) => {
+    e.preventDefault();
 
     if (!values.userName) {
       alert("Fill The Product Name")
@@ -34,26 +54,26 @@ function Home() {
       alert("Fill the Image")
       return
     }
-    else if (values) {
-      alert("Fill The Product Form Succesfully")
-    }
-
-    if (activeEditIndex !== null) {
-      const updateData = data.map((item, index) => {
-        if (index === activeEditIndex) {
-          return values;
-        }
-        return item;
-      });
+     
+     if (activeEditIndex !== null) {
+      await updateUser();
+      const updateData = data.map((item) => 
+        item.id === activeEditIndex ? values : item
+      );
 
       setData(updateData);
       setValues(initialValue);
       setActiveEditIndex(null);
-      navigate("/navigation", { replace: true });
-      return;
-    }
+      alert("Product Updated ✅");
+    }else {
+      await createUser();
+      setData([...data, values]);
+      alert("Product added successfully ✅");
 
-    setData([...data, values]);
+      
+    }
+   
+
     navigate("/navigation", { replace: true });
     setValues(initialValue);
   }
@@ -64,7 +84,7 @@ function Home() {
     <div className="">
       <div className='min-h-screen min-w-screen border-b border-default pt-25 min-h-screen min-w-screen border-b border-default pt-25'>
         
-        <form action={multiSubmit} >
+        <form >
           <br />
           <div className='ui divider p-8 text-center'>
             <div className='field '>
@@ -107,8 +127,8 @@ function Home() {
                 </div>
               </label>
             </div>
-            <Submit />
-          </div>
+            {/* <Submit /> */}
+            <button className=' border-2 border-blue-100 rounded-lg px-7 py-1.5' onClick={(e) => multiSubmit(e)}>{activeEditIndex !== null ? 'Update' : 'Add'}</button>          </div>
         </form>
       </div >
 
