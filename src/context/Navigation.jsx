@@ -4,6 +4,7 @@ import Card from './cards';
 import { ProductContext } from '../Usecontext/context';
 import { useNavigate } from 'react-router';
 import { IoIosSearch } from "react-icons/io";
+import axios from 'axios';
 
 function Navigation() {
     const navigate = useNavigate();
@@ -20,20 +21,27 @@ function Navigation() {
     const [debouncedMax] = useDebounce (maxPrice, 1000);
     console.log(debouncedMax)
 
-
-  
-    const deleteData = async (id) => {
-        await fetch(`http://localhost:3001/products/${id}`, {
-          method: "DELETE",
-        });
+       const deleteData = async (id) => {
+        await axios.delete(`http://localhost:3001/products/${id}`);
         setData(data.filter((item) => item.id !== id));
-      };
+       }
+  
+    // const deleteData = async (id) => {
+    //     await fetch(`http://localhost:3001/products/${id}`, {
+    //       method: "DELETE",
+    //     });
+    //     setData(data.filter((item) => item.id !== id));
+    //   };
      
+
+
     //   const deleteData = (index) => {
     //     setData((prev) =>
     //       prev.filter((item, itemIndex) => itemIndex !== index)
     //     );
     //   };
+
+
       const editData = (item) => {
     
         setValues(item)
@@ -44,9 +52,7 @@ function Navigation() {
  
     const filter = data.filter((item) => {
         const searchMatch = `${item.userName} ${item.weight} ${item.price}`.toLowerCase().includes(debouncedSearch.toLowerCase());
-
-        const productPrice = (item.weight);
-        console.log(productPrice);
+        const productPrice = (item.price);
         const minMatch = debouncedMin === "" || productPrice >=Number(debouncedMin);
         const maxMatch = debouncedMax === "" || productPrice <=Number(debouncedMax);
 
