@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 // import ProductNavigation  from "../LocalStorage/Navigation";
 import CreateProduct from "../context/Home";
 import ProductNavigation from "../context/Navigation";
-import Layout from "../context/Laylot";
+import Layout from "../FandH/Laylot";
 import  ProductReport from "../context/report";
 import Setting from "../context/setting";
 import About from "../context/about";

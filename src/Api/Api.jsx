@@ -1,6 +1,4 @@
 import axios from "axios";
-import { ProductContext } from "../Usecontext/context";
-import { useContext, useEffect } from "react";
 
 
 const p_URL = 'http://localhost:3001/products'
