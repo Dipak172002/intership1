@@ -3,7 +3,7 @@ import ConvertImage from './ConvertImage'
 import { useNavigate } from 'react-router';
 // import { useFormStatus } from 'react-dom';
 import { ProductContext } from '../Usecontext/context';
-import axios from 'axios';
+import {createUser,updateUser} from '../Api/Api'
 
 // function Submit() {
 //   const { pending } = useFormStatus();
@@ -15,6 +15,7 @@ function Home() {
   const { data, setData, values, setValues, initialValue, activeEditIndex, setActiveEditIndex } =
     useContext(ProductContext);
 
+
     // const createUser = async()=>{
     // await fetch ("http://localhost:3001/products" ,{
     //     method:'Post',
@@ -25,9 +26,9 @@ function Home() {
     //   })
       
     // }
-    const createUser =async()=>{
-      await axios.post("http://localhost:3001/products",values);
-    };
+    // const createUser =async()=>{
+    //   await axios.post("http://localhost:3001/products",values);
+    // };
     
     // const updateUser = async () => {
     //   await fetch(`http://localhost:3001/products/${activeEditIndex}`, {
@@ -36,9 +37,9 @@ function Home() {
     //     body: JSON.stringify(values),
     //   });
     // };
-    const updateUser = async () => {
-      await axios.patch(`http://localhost:3001/products/${activeEditIndex}`,values);
-    }
+    // const updateUser = async () => {
+    //   await axios.patch(`http://localhost:3001/products/${activeEditIndex}`,values);
+    // }
 
   const multiSubmit = async(e) => {
     e.preventDefault();
@@ -62,18 +63,17 @@ function Home() {
     }
      
      if (activeEditIndex !== null) {
-      await updateUser();
+      const updated = await updateUser(activeEditIndex,values);
       const updateData = data.map((item) => 
-        item.id === activeEditIndex ? values : item
-      );
+        item.id === activeEditIndex ? updated : item );
 
       setData(updateData);
-      setValues(initialValue);
+      // setValues(initialValue);
       setActiveEditIndex(null);
       alert("Product Updated ✅");
     }else {
-      await createUser();
-      setData([...data, values]);
+      const saved = await createUser(values);
+      setData([...data, saved]);
       alert("Product added successfully ✅");
 
       

@@ -4,7 +4,7 @@ import Card from './cards';
 import { ProductContext } from '../Usecontext/context';
 import { useNavigate } from 'react-router';
 import { IoIosSearch } from "react-icons/io";
-import axios from 'axios';
+import {deleteProduct} from "../Api/Api"
 
 function Navigation() {
     const navigate = useNavigate();
@@ -21,10 +21,10 @@ function Navigation() {
     const [debouncedMax] = useDebounce (maxPrice, 1000);
     console.log(debouncedMax)
 
-       const deleteData = async (id) => {
-        await axios.delete(`http://localhost:3001/products/${id}`);
-        setData(data.filter((item) => item.id !== id));
-       }
+    //    const deleteData = async (id) => {
+    //     await axios.delete(`http://localhost:3001/products/${id}`);
+    //     setData(data.filter((item) => item.id !== id));
+    //    }
   
     // const deleteData = async (id) => {
     //     await fetch(`http://localhost:3001/products/${id}`, {
@@ -35,15 +35,14 @@ function Navigation() {
      
 
 
-    //   const deleteData = (index) => {
-    //     setData((prev) =>
-    //       prev.filter((item, itemIndex) => itemIndex !== index)
-    //     );
-    //   };
+      const deleteData = async (id) => {
+        const delet = await deleteProduct(id);
+        setData((prev) => prev.filter((item, itemIndex) => item.id !== id)
+        );
+      };
 
 
-      const editData = (item) => {
-    
+        const editData = (item) => {
         setValues(item)
         setActiveEditIndex(item.id)
         navigate("/");

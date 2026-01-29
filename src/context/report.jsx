@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react";
 import { ProductContext } from "../Usecontext/context";
 import axios from "axios";
-
+// import Api from "../Api/Api"
+import {getUserData}  from '../Api/Api'
 export default function Report() {
   const { data ,setData} = useContext(ProductContext);
 
@@ -12,13 +13,16 @@ export default function Report() {
   //   console.log(response);
   //   setData(response)
   // }
-  const getUserData = async() =>{
-    const response = await axios.get("http://localhost:3001/products")
-    setData(response.data)
-  }
+  // export default function Report() {
+  //   const { data ,setData} = useContext(ProductContext);
+  
+  // const getUserData = async() =>{
+  //   const response = await axios.get("http://localhost:3001/products")
+  //   setData(response.data)
+  // }
   useEffect (()=>{
-    getUserData()
-  },[])
+    getUserData().then(setData)
+  },[setData])
 
   return (
     <div className="pt-45 min-h-screen  min-w-screen py-17 px-6">
